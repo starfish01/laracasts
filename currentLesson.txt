@@ -1,3 +1,3 @@
-Lesson Currently On - 15
-https://laracasts.com/series/laravel-from-scratch-2018/episodes/15?autoplay=true
-current time 9
+Lesson Currently On - 18
+https://laracasts.com/series/laravel-from-scratch-2018/episodes/18?autoplay=true
+current time 

@@ -15,7 +15,7 @@
     <tbody>
         @foreach ($projects as $project)
         <tr>
-        <td><a href="/projects/{{ $project->id }}">{{ $project->title }}</a></td>
+            <td><a href="/projects/{{ $project->id }}">{{ $project->title }}</a></td>
             <td>{{ $project->description }}</td>
             <td><a href="/projects/{{ $project->id }}/edit">Edit</a></td>
         </tr>
@@ -24,6 +24,5 @@
 </table>
 
 <a href="/projects/create" class="btn is-link">Create Project</a>
-
 
 @endsection
