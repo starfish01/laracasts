@@ -15,15 +15,15 @@
     <tbody>
         @foreach ($projects as $project)
         <tr>
-            <td>{{ $project->title }}</td>
+        <td><a href="/projects/{{ $project->id }}">{{ $project->title }}</a></td>
             <td>{{ $project->description }}</td>
-            <td><a href="projects/{{ $project->id }}/edit">Edit</a></td>
+            <td><a href="/projects/{{ $project->id }}/edit">Edit</a></td>
         </tr>
         @endforeach
     </tbody>
 </table>
 
-<a href="projects/create" class="btn is-link">Create Project</a>
+<a href="/projects/create" class="btn is-link">Create Project</a>
 
 
-@endsection('content')
+@endsection

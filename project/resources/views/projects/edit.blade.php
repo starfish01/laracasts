@@ -40,4 +40,4 @@
     </div>
 </form>
 
-@endsection('content')
+@endsection
