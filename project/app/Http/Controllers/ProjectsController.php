@@ -8,9 +8,22 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $projects = \App\Project::all();
+
+        auth()->id(); // returns id eg. 4
+        auth()->user(); // returns the User
+        auth()->check(); // checks if the user is signed in Bool
+        auth()->guest(); // checks if the user is a guest Bool
+
+
+        $projects = Project::all();
         return view('projects.index', compact('projects'));
     }
 
@@ -24,6 +37,8 @@ class ProjectsController extends Controller
             'title' => ['required', 'min:3', 'max:255'],
             'description' => ['required', 'min:3']
         ]);
+
+        $attributes['owner_id'] = auth()->id();
 
         Project::create($attributes);
         return redirect('/projects');
@@ -48,6 +63,10 @@ class ProjectsController extends Controller
 
     public function show(Project $project)
     {
+
+        // abort_unless(auth()->user()->owns($project), 403);
+        // abort_if($project->owner_id !== auth()->id(), 403);
+
         return view('projects.show', compact('project'));
     }
 }
