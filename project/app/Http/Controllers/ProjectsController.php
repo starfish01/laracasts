@@ -17,13 +17,13 @@ class ProjectsController extends Controller
     public function index()
     {
 
-        auth()->id(); // returns id eg. 4
-        auth()->user(); // returns the User
-        auth()->check(); // checks if the user is signed in Bool
-        auth()->guest(); // checks if the user is a guest Bool
+        // auth()->id(); // returns id eg. 4
+        // auth()->user(); // returns the User
+        // auth()->check(); // checks if the user is signed in Bool
+        // auth()->guest(); // checks if the user is a guest Bool
 
 
-        $projects = Project::all();
+        $projects = Project::where('owner_id', auth()->id())->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -66,6 +66,8 @@ class ProjectsController extends Controller
 
         // abort_unless(auth()->user()->owns($project), 403);
         // abort_if($project->owner_id !== auth()->id(), 403);
+
+        $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
     }

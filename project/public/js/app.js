@@ -49506,8 +49506,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\patri\Documents\github\laracasts\project\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\patri\Documents\github\laracasts\project\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\patrick\Documents\GitHub\laracasts\project\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\patrick\Documents\GitHub\laracasts\project\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
