@@ -21,10 +21,12 @@ class ProjectsController extends Controller
         // auth()->user(); // returns the User
         // auth()->check(); // checks if the user is signed in Bool
         // auth()->guest(); // checks if the user is a guest Bool
+        // $projects = Project::where('owner_id', auth()->id())->get();
+        // $projects = auth()->user()->projects;
 
-
-        $projects = Project::where('owner_id', auth()->id())->get();
-        return view('projects.index', compact('projects'));
+        return view('projects.index',  [
+            'projects' => auth()->user()->projects
+        ]);
     }
 
     public function create()
@@ -33,10 +35,7 @@ class ProjectsController extends Controller
     }
     public function store()
     {
-        $attributes = request()->validate([
-            'title' => ['required', 'min:3', 'max:255'],
-            'description' => ['required', 'min:3']
-        ]);
+        $attributes = $this->vaildateProject();
 
         $attributes['owner_id'] = auth()->id();
 
@@ -51,7 +50,7 @@ class ProjectsController extends Controller
 
     public function update(Project $project)
     {
-        $project->update(request(['title', 'description']));
+        $project->update($this->vaildateProject());
         return redirect('/projects');
     }
 
@@ -70,5 +69,14 @@ class ProjectsController extends Controller
         $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
+    }
+
+
+    public function vaildateProject()
+    {
+        return request()->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3']
+        ]);
     }
 }
