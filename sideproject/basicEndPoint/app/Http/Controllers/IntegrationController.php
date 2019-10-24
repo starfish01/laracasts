@@ -46,7 +46,7 @@ class IntegrationController extends Controller
         $attributes['owner_id'] = auth()->id();
 
         Integration::create($attributes);
-        return redirect('/home');
+        return redirect('/integrations');
     }
 
     /**
@@ -68,7 +68,7 @@ class IntegrationController extends Controller
      */
     public function edit(Integration $integration)
     {
-        //
+        return view('layouts.integrations.create', compact('integration'));
     }
 
     /**
@@ -81,6 +81,15 @@ class IntegrationController extends Controller
     public function update(Request $request, Integration $integration)
     {
         //
+
+        $attributes = $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+        ]);
+
+        $integration->update($attributes);
+
+        return redirect('/integrations');
+
     }
 
     /**
@@ -92,5 +101,7 @@ class IntegrationController extends Controller
     public function destroy(Integration $integration)
     {
         //
+        $integration->delete();
+        return redirect('/integrations');
     }
 }

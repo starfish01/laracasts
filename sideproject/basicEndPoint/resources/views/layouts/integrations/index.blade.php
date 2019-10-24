@@ -28,7 +28,7 @@
                                 <td><a href="/integrations/{{ $item->id }}">{{ $item->title }}</a></td>
                                 <td></td>
                                 </td>
-                                <td><a href="/integration/{{ $item->id }}/edit">Edit</a></td>
+                                <td><a href="/integrations/{{ $item->id }}/edit">Edit</a></td>
                             </tr>
                             @endforeach
                             </tr>
