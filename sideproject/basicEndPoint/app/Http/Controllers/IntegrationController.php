@@ -57,7 +57,7 @@ class IntegrationController extends Controller
      */
     public function show(Integration $integration)
     {
-        //
+        return view('layouts.integrations.show', compact('integration'));
     }
 
     /**
@@ -89,7 +89,6 @@ class IntegrationController extends Controller
         $integration->update($attributes);
 
         return redirect('/integrations');
-
     }
 
     /**

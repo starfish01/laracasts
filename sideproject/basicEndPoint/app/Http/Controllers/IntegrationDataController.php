@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Integration;
 use App\Integration_data;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,15 @@ class IntegrationDataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Integration $integration)
     {
-        //
+        $attributes = request()->validate(['title' => ['required', 'min:3', 'max:255'], 'integration_id' => ['required']]);
+
+        $attributes['owner_id'] = auth()->id();
+        $attributes['description'] = '';
+
+        $integration->addData($attributes);
+        return back();
     }
 
     /**
@@ -44,9 +51,11 @@ class IntegrationDataController extends Controller
      * @param  \App\Integration_data  $integration_data
      * @return \Illuminate\Http\Response
      */
-    public function show(Integration_data $integration_data)
+    public function show(Integration $integration, Integration_data $integration_data)
     {
         //
+        // dd($integration_data->id);
+        return  view('layouts.integrations.show', compact('integration_data', 'integration'));
     }
 
     /**
@@ -69,7 +78,11 @@ class IntegrationDataController extends Controller
      */
     public function update(Request $request, Integration_data $integration_data)
     {
-        //
+        $integration_data->update($request->validate([
+            'description' => ['required']
+        ]));
+
+        return back();
     }
 
     /**
@@ -81,5 +94,21 @@ class IntegrationDataController extends Controller
     public function destroy(Integration_data $integration_data)
     {
         //
+        $integration_data->delete();
+        return redirect('/integrations');
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Integration_data  $integration_data
+     * @return \Illuminate\Http\Response
+     */
+    public function output(Integration_data $integration_data)
+    {
+        //
+        header('Content-Type: application/json');
+        echo ($integration_data->description);
     }
 }

@@ -19,3 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('integrations', 'IntegrationController');
+
+Route::POST('/integrations/{integration}/data', 'IntegrationDataController@store');
+Route::get('/integrations/{integration}/data/{integration_data}', 'IntegrationDataController@show');
+Route::PATCH('/data/{integration_data}', 'IntegrationDataController@update');
+Route::get('/data/{integration_data}/output', 'IntegrationDataController@output');
+Route::Delete('/data/{integration_data}/', 'IntegrationDataController@destroy');
