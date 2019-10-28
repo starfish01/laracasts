@@ -19,14 +19,14 @@ class ProjectsTest extends TestCase
 
         $this->withoutExceptionHandling();
 
+        $this->actingAs(factory('App\User')->create());
+
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence
         ];
 
         $this->post('/projects', $attributes)->assertRedirect('/projects');
-
-        $this->post('/projects', $attributes);
 
         $this->assertDatabaseHas('projects', $attributes);
 
@@ -35,30 +35,33 @@ class ProjectsTest extends TestCase
 
     public function test_a_user_can_view_a_project()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $project = factory('App\Project')->create();
         $this->get($project->path())
             ->assertSee($project->title)
-            ->assertSee($project->description);
+            ->assertSee($project->description)
+            ->assertSee($project->owner_id);
     }
 
     public function test_a_project_requires_a_title()
     {
+        $this->actingAs(factory('App\User')->create());
         $attributes = factory('App\Project')->raw(['title' => '']);
         $this->post('/projects', $attributes)->assertSessionHasErrors('title');
     }
 
     public function test_a_project_requires_a_description()
     {
+        $this->actingAs(factory('App\User')->create());
         $attributes = factory('App\Project')->raw(['description' => '']);
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
 
-    public function test_a_project_requires_a_owner()
+    public function test_only_authenticated_users_can_create_projects()
     {
         // $this->withoutExceptionHandling();
 
-        $attributes = factory('App\Project')->raw(['owner_id' => null]);
-        $this->post('/projects', $attributes)->assertSessionHasErrors('owner_id');
+        $attributes = factory('App\Project')->raw();
+        $this->post('/projects', $attributes)->assertRedirect('login');
     }
 }
