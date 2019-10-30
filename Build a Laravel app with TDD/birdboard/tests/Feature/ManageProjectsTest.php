@@ -14,7 +14,7 @@ class ManageProjectsTest extends TestCase
      *
      * @return void
      */
-    public function test_guest_may_not_reate_a_project()
+    public function test_guest_may_not_create_a_project()
     {
 
         $this->withoutExceptionHandling();

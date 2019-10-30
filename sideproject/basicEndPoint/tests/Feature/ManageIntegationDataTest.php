@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ManageProjectTest extends TestCase
+class ManageIntegationDataTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
     /**
@@ -14,6 +14,9 @@ class ManageProjectTest extends TestCase
      *
      * @return void
      */
-    public function test_a_guest_cannot_access_projects()
-    { }
+    public function test_guest_may_not_create_a_project()
+    {
+
+
+     }
 }
