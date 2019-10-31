@@ -1,3 +1,1 @@
-https://laracasts.com/series/build-a-laravel-app-with-tdd/episodes/5?autoplay=true#
-
-3:33min
+https://laracasts.com/series/build-a-laravel-app-with-tdd/episodes/11?autoplay=true

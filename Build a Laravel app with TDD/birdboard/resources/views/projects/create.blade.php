@@ -1,39 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-</head>
+@section('content')
+<h1>Create a new project</h1>
 
-<body>
-    <h1>Create a new project</h1>
+<form method="POST" action="/projects">
+    {{ csrf_field() }}
 
-    <form method="POST" action="/projects">
-        {{ csrf_field() }}
-
-        <div class="field">
-            <label for="title" class="label">Title</label>
-            <div class="control">
-                <input value="{{ old('title') }}" required type="text" placeholder="title" name="title" class="input {{$errors->has('title') ? 'is-danger' :''}}">
-            </div>
+    <div class="field">
+        <label for="title" class="label">Title</label>
+        <div class="control">
+            <input value="{{ old('title') }}" required type="text" placeholder="title" name="title" class="input {{$errors->has('title') ? 'is-danger' :''}}">
         </div>
+    </div>
 
-        <div class="field">
-            <label for="description" class="label">Description</label>
-            <div class="control">
-                <textarea required placeholder="description" name="description" class="textarea {{$errors->has('description') ? 'is-danger' :''}}">{{ old('description') }}</textarea>
-            </div>
+    <div class="field">
+        <label for="description" class="label">Description</label>
+        <div class="control">
+            <textarea required placeholder="description" name="description" class="textarea {{$errors->has('description') ? 'is-danger' :''}}">{{ old('description') }}</textarea>
         </div>
+    </div>
 
-        <div class="field">
-            <div class="control">
-                <button class="button is-link" type="submit">Create Project</button>
-            </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link" type="submit">Create Project</button>
+            <a href="/projects">Cancel</a>
         </div>
-
-</body>
-
-</html>
+    </div>
+</form>
+@endsection
