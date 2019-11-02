@@ -1,0 +1,25 @@
+// .button {
+//     @apply .bg .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+//     box-shadow: 0 2px 7px 0 #b0eaff;
+// }
+
+.button {
+    background: $cyan;
+    width: 132px;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px 0 $blue;
+    text-align: center;
+    padding: 6px;
+    color: white;
+    &:hover {
+        background: $blue;
+    }
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.25rem;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}

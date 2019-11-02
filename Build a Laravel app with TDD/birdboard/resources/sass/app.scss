@@ -1,10 +1,5 @@
-// Fonts
-
 // Variables
 @import "variables";
-
-// Bootstrap
-// @import "~bootstrap/scss/bootstrap";
 
 @import "tailwindcss/base";
 
@@ -12,16 +7,4 @@
 
 @import "tailwindcss/utilities";
 
-.button {
-    background: $cyan;
-    width: 132px;
-    height: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 7px 0 $blue;
-    text-align: center;
-    padding: 6px;
-    color: white;
-    &:hover {
-        background: $blue;
-    }
-}
+@import "tailwind";
