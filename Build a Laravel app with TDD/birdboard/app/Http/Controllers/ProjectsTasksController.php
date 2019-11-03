@@ -11,7 +11,9 @@ class ProjectsTasksController extends Controller
     //
     public function store(Project $project)
     {
-        abort_unless(auth()->user()->is($project->owner), 403);
+
+        $this->authorize('update', $project);
+
         request()->validate([
             'body' => 'required'
         ]);
@@ -21,7 +23,10 @@ class ProjectsTasksController extends Controller
 
     public function update(Project $project, Task $task)
     {
-        abort_unless(auth()->user()->is($project->owner), 403);
+        // abort_unless(auth()->user()->is($project->owner), 403);
+
+        $this->authorize('update', $task->project);
+
         request()->validate([
             'body' => 'required'
         ]);

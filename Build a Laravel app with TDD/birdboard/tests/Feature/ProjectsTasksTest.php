@@ -57,7 +57,7 @@ class ProjectsTasksTest extends TestCase
             'completed' => true
         ];
 
-        $this->patch($project->path() . '/tasks/' . $task->id, $attributes);
+        $this->patch($task->path(), $attributes);
 
         $this->assertDatabaseHas('tasks', $attributes);
     }
@@ -74,7 +74,7 @@ class ProjectsTasksTest extends TestCase
             'completed' => true
         ];
 
-        $this->patch($project->path() . '/tasks/' . $task->id, $attributes)
+        $this->patch($task->path(), $attributes)
             ->assertStatus(403);
 
         $this->assertDatabaseMissing('tasks', $attributes);
