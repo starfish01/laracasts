@@ -6,7 +6,7 @@ use App\Project;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Setup\ProjectFactory;
+use Facades\Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 
 class ProjectsTasksTest extends TestCase
@@ -15,13 +15,13 @@ class ProjectsTasksTest extends TestCase
 
     public function test_a_project_can_have_tasks()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
-        $this->signIn();
-        $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
+        // $this->signIn();
+        // $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
+        $project =  ProjectFactory::create();
 
-
-        $this->post($project->path() . '/tasks', ['body' => 'Test Task']);
+        $this->actingAs($project->owner)->post($project->path() . '/tasks', ['body' => 'Test Task']);
         $this->get($project->path())
             ->assertSee('Test Task');
     }
@@ -48,12 +48,8 @@ class ProjectsTasksTest extends TestCase
 
     public function test_a_task_can_be_updated()
     {
-        $this->withoutExceptionHandling();
+        $project =  ProjectFactory::withTasks(1)->create();
 
-
-        $project =  app(ProjectFactory::class)->ownedBy($this->signIn())->withTasks(1)->create();
-
-        // $this->signIn();
         // $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
         // $task = $project->addTask('task task');
 
@@ -62,24 +58,24 @@ class ProjectsTasksTest extends TestCase
             'completed' => true
         ];
 
-        $this->patch($project->path() . '/tasks/' . $project->tasks[0]->id, $attributes);
+        $this->actingAs($project->owner)
+            ->patch($project->tasks[0]->path(), $attributes);
 
         $this->assertDatabaseHas('tasks', $attributes);
     }
 
     public function test_only_an_owner_of_a_task_can_update()
     {
-        // $this->withoutExceptionHandling();
         $this->signIn();
-        $project = factory(Project::class)->create();
-        $task = $project->addTask('task task');
+
+        $project =  ProjectFactory::withTasks(1)->create();
 
         $attributes = [
             'body' => 'changed',
             'completed' => true
         ];
 
-        $this->patch($task->path(), $attributes)
+        $this->patch($project->tasks[0]->path(), $attributes)
             ->assertStatus(403);
 
         $this->assertDatabaseMissing('tasks', $attributes);
