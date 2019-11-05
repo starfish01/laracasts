@@ -1,30 +1,16 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
-<h1>Create a new project</h1>
+<div class="lg:w-1/2 bg-white lg:mx-auto bg-card p-6 md:py-12 md:px-16 rounded shadow">
+    <h1 class="text-2xl font-normal mb-10 text-center">
+        Let's start something new
+    </h1>
 
-<form method="POST" action="/projects">
-    {{ csrf_field() }}
-
-    <div class="field">
-        <label for="title" class="label">Title</label>
-        <div class="control">
-            <input value="{{ old('title') }}" required type="text" placeholder="title" name="title" class="input {{$errors->has('title') ? 'is-danger' :''}}">
-        </div>
-    </div>
-
-    <div class="field">
-        <label for="description" class="label">Description</label>
-        <div class="control">
-            <textarea required placeholder="description" name="description" class="textarea {{$errors->has('description') ? 'is-danger' :''}}">{{ old('description') }}</textarea>
-        </div>
-    </div>
-
-    <div class="field">
-        <div class="control">
-            <button class="button is-link" type="submit">Create Project</button>
-            <a href="/projects">Cancel</a>
-        </div>
-    </div>
-</form>
+    <form method="POST" action="/projects">
+        @include ('projects._form', [
+        'project' => new App\Project,
+        'buttonText' => 'Create Project'
+        ])
+    </form>
+</div>
 @endsection

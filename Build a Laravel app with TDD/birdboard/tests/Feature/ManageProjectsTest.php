@@ -120,7 +120,23 @@ class ManageProjectsTest extends TestCase
             ->patch($project->path(), $attributes)
             ->assertRedirect($project->path());
 
-           $this->get($project->path() . '/edit')->assertOk();
+        $this->get($project->path() . '/edit')->assertOk();
+
+        $this->assertDatabaseHas('projects', $attributes);
+    }
+
+    public function test_a_user_can_update_a_projects_general_notes()
+    {
+        $project = ProjectFactory::create();
+
+        $attributes = [
+            'notes' => 'Changed Notes'
+        ];
+        $this->actingAs($project->owner)
+            ->patch($project->path(), $attributes)
+            ->assertRedirect($project->path());
+
+        $this->get($project->path() . '/edit')->assertOk();
 
         $this->assertDatabaseHas('projects', $attributes);
     }
