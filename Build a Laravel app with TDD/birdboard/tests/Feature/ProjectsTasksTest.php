@@ -39,10 +39,16 @@ class ProjectsTasksTest extends TestCase
     public function test_a_task_requires_a_body()
     {
         $this->signIn();
+
+        $project = ProjectFactory::create();
+
+
         $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
         $attributes = factory('App\Task')->raw(['body' => '']);
 
-        $this->post($project->path() . '/tasks', $attributes)
+
+        $this->actingAs($project->owner)
+            ->post($project->path() . '/tasks', $attributes)
             ->assertSessionHasErrors('body');
     }
 
