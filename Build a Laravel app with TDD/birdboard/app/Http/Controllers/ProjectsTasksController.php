@@ -33,8 +33,11 @@ class ProjectsTasksController extends Controller
 
         $task->update([
             'body' => request('body'),
-            'completed' => request()->has('completed')
         ]);
+
+        if (request()->has('completed')) {
+            $task->complete();
+        }
 
         return redirect($project->path());
     }

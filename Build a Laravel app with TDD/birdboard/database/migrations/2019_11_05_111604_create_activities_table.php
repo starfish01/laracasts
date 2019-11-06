@@ -15,9 +15,9 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('project_id');
+            $table->unsignedBigInteger('project_id')->index();
             $table->timestamps();
-
+            $table->string('description');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }

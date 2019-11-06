@@ -1,12 +1,6 @@
 <?php
 
-use App\Activity;
 
-\App\Project::created(function ($project) {
-    Activity::create([
-        'project_id' => $project->id
-    ]);
-});
 
 /*
 |--------------------------------------------------------------------------
