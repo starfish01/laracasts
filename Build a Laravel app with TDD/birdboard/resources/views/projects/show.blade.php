@@ -12,18 +12,20 @@
 </header>
 
 <main>
+    <h2 class="text-grey font-normal mb-5">Tasks</h2>
     <div class="lg:flex -m-3">
         <div class="lg:w-3/4 px-3 mb-8">
             <div class="mb-6">
-                <h2 class="text-grey font-normal mb-3">Tasks</h2>
                 @foreach($project->tasks as $task)
                 <div class="card mb-3">
                     <form action="{{ $task->path() }}" method="POST">
                         @method('patch')
                         @csrf
                         <div class="flex">
-                            <input name="body" require class="w-full {{ $task->completed ? 'text-grey' : '' }}" value="{{$task->body}}">
-                            <input name="completed" type="checkbox" {{ $task->completed ? 'checked' : '' }} onChange="this.form.submit()">
+                            <input name="body" require class="w-full {{ $task->completed ? 'text-grey' : '' }}"
+                                value="{{$task->body}}">
+                            <input name="completed" type="checkbox" {{ $task->completed ? 'checked' : '' }}
+                                onChange="this.form.submit()">
 
                         </div>
 
@@ -45,7 +47,8 @@
                 <form action="{{ $project->path() }}" method="POST">
                     @method('patch')
                     @csrf
-                    <textarea name="notes" placeholder="Are there any notes you would like to make?" class="card w-full mb-3">{{ $project->notes }}
+                    <textarea name="notes" placeholder="Are there any notes you would like to make?"
+                        class="card w-full mb-3">{{ $project->notes }}
                     </textarea>
 
                     <button type="submit" class="button">Update</button>
@@ -59,7 +62,11 @@
         </div>
         <div class="lg:w-1/4 px-3">
             @include('projects.card')
+            @include('projects.activity.activity_card')
         </div>
+
+
+
 
     </div>
 
