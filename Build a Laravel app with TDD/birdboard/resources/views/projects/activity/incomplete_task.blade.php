@@ -1,1 +1,1 @@
-You lied and had to uncheck a task
+You incompleted "{{ $activity->subject->body }}" task

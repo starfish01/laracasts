@@ -1,5 +1,5 @@
 Git repo
 https://github.com/laracasts/birdboard/
 
-https://laracasts.com/series/build-a-laravel-app-with-tdd/episodes/25?autoplay=true
+https://laracasts.com/series/build-a-laravel-app-with-tdd/episodes/26?autoplay=true
 min 0
