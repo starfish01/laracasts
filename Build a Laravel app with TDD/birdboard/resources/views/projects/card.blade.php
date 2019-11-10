@@ -4,5 +4,13 @@
             {{ $project->title }}
         </a>
     </h3>
-    <div class="text-grey">{{ str_limit($project->description, 100) }}</div>
+    <div class="text-grey mb-3">{{ str_limit($project->description, 100) }}</div>
+    <footer>
+
+        <form class="text-right text-xs" method="POST" action="{{ $project->path() }}">
+            @method('DELETE')
+            @csrf
+            <button type="submit">Delete</button>
+        </form>
+    </footer>
 </div>
