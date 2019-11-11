@@ -75,4 +75,6 @@ class ProjectsController extends Controller
             'notes' => 'nullable'
         ]);
     }
+
+
 }
