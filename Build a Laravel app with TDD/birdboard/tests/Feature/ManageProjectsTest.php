@@ -153,17 +153,34 @@ class ManageProjectsTest extends TestCase
         $this->assertDatabaseMissing('projects', $project->only('id'));
     }
 
-    public function test_guests_cannot_delete_projects(){
+    public function test_guests_cannot_delete_projects()
+    {
         $project = ProjectFactory::create();
         $this->delete($project->path())->assertRedirect('/login');
 
         $this->signIn();
 
         $this->delete($project->path())->assertStatus(403);
-
     }
 
+    public function test_a_user_can_see_all_projects_they_have_been_invited_to_on_their_dashboard()
+    {
+
+        // given we are signed in
+        $user = $this->signIn();
 
 
+        // and we've been invited to a project that was created by another user
+        $project = ProjectFactory::create();
 
+        $project->invite($user);
+
+        // when i visit my dashboard
+        $this->get('/projects')
+        ->assertSee($project->title);
+
+
+        // I should see that project
+
+     }
 }

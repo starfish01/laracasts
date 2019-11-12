@@ -15,10 +15,12 @@ class CreateProjectMembersTable extends Migration
     {
         Schema::create('project_members', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id')->index();
-            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->timestamps();
+
+            $table->index(['project_id', 'user_id']);
         });
     }
 
