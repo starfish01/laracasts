@@ -40,6 +40,9 @@
             "database/seeds",
             "database/factories",
             "tests/TestCase.php"
+        ],
+        "files": [
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

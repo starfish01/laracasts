@@ -32,10 +32,10 @@ class Project extends Model
 
     public function invite(User $user)
     {
-        return $this->memebers()->attach($user);
+        return $this->members()->attach($user);
      }
 
-    public function memebers()
+    public function members()
     {
         return $this->belongsToMany(User::class, 'project_members')->withTimestamps();
      }

@@ -169,15 +169,14 @@ class ManageProjectsTest extends TestCase
         // given we are signed in
         $user = $this->signIn();
 
-
         // and we've been invited to a project that was created by another user
-        $project = ProjectFactory::create();
+        $project = tap(ProjectFactory::create())->invite($user);
 
-        $project->invite($user);
+//        $project = ProjectFactory::create();
+//        $project->invite($user);
 
         // when i visit my dashboard
-        $this->get('/projects')
-        ->assertSee($project->title);
+        $this->get('/projects')->assertSee($project->title);
 
 
         // I should see that project

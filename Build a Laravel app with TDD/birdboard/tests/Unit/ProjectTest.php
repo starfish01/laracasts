@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -33,7 +34,7 @@ class ProjectTest extends TestCase
     public function test_it_can_invite_a_user()
     {
         $project = factory('App\Project')->create();
-        $project->invite($user = factory(\App\User::class)->create());
-        $this->assertTrue($project->memebers->contains($user));
+        $project->invite($user = factory(User::class)->create());
+        $this->assertTrue($project->members->contains($user));
      }
 }
