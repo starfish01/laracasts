@@ -1,7 +1,7 @@
-@if($errors->any())
+@if($errors->{ $bag ?? 'default' }->any())
 <div class="field mt-6">
 
-    @foreach ($errors->all() as $error)
+    @foreach ($errors->{ $bag ?? 'default' }->all() as $error)
     <li class="text-sm text-red-800">{{ $error }}</li>
     @endforeach
 

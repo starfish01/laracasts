@@ -47,13 +47,15 @@ class InvitationsTest extends TestCase
 
         $this->actingAs($project->owner)->post($project->path() . '/invitations', [
             'email' => 'not@gamil.com'
-        ])->assertSessionHasErrors(['email' => 'The user your inviting must have a bird board account']);
+        ])->assertSessionHasErrors( [
+            'email' => 'The user you are inviting must have a Birdboard account.'
+            , null, 'default']);
 
     }
 
     function test_non_owners_may_not_invite_users()
     {
-//        $this->withoutExceptionHandling();
+        //        $this->withoutExceptionHandling();
         $project = ProjectFactory::create();
 
         $user = factory(User::class)->create();
@@ -61,8 +63,5 @@ class InvitationsTest extends TestCase
         $this->actingAs($user)
             ->post($project->path() . '/invitations')
             ->assertStatus(403);
-
-
     }
-
 }

@@ -2,3 +2,4 @@ Git repo
 https://github.com/laracasts/birdboard/
 
 https://laracasts.com/series/build-a-laravel-app-with-tdd/episodes/34?autoplay=true
+min 7
